@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html>
+<meta charset="utf-8"></meta>
+<head>
+</head>
+<body>
+<button id="btn">创建脚本</button>
+<button id="btn1">用innerHTML创建脚本</button>
+<button id="btn2">更改现有script的src</button>
+<iframe id="iframe1" src="about:blank" style="display:none;"></iframe>
+<br/>
+<br/>
+<br/>
+请输入你想运行的脚本
+<br/>
+<textarea id="fu" style="width:400px;height:150px;">
+var sc = document.createElement('script');
+sc.src = 'http://libs.baidu.com/jquery/2.0.0/jquery.min.js';
+document.body.appendChild(sc);
+</textarea>
+<br/>
+<button id="run">Run</button>
+<div id="you"></div>
+<script id="sc1" type="text/javascript" src="js/xss-protect.js"></script>
+<script type="text/javascript">
+    var btn = document.getElementById('btn'),
+        btn1 = document.getElementById('btn1'),
+        btn2 = document.getElementById('btn2'),
+        fu = document.getElementById('fu'),
+        run = document.getElementById('run');
+
+    btn.onclick = function(){
+        var el = document.createElement('script');
+        el.src = 'http://libs.baidu.com/jquery/2.0.0/jquery.min.js';
+        document.body.appendChild(el);
+    }
+
+    btn1.onclick = function(){
+        var head = document.getElementsByTagName('head')[0];
+        head.innerHTML = '<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"><\/script>';
+    }
+
+    btn2.onclick = function(){
+        var sc1 = document.getElementById('sc1');
+        sc1.src = 'http://libs.baidu.com/jquery/2.0.0/jquery.min.js';
+    }
+
+    run.onclick = function(){
+        eval(fu.value);
+    }
+</script>
+</body>
+
